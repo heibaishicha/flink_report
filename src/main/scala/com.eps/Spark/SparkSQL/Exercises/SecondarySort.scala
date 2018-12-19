@@ -1,6 +1,5 @@
 package com.eps.Spark.SparkSQL.Exercises
 
-
 import org.apache.spark.{SparkContext, SparkConf}
 import org.apache.spark.rdd.RDD.rddToOrderedRDDFunctions
 import org.apache.spark.rdd.RDD.rddToPairRDDFunctions
@@ -10,18 +9,18 @@ object SecondarySort {
   def main(args: Array[String]) {
 
     //编译设置
-    System.setProperty("hadoop.home.dir", "D:\\hadoop-common-2.2.0-bin-master")
+    System.setProperty("hadoop.home.dir", "D:\\softwares\\Hadoop\\hadoop-common-2.6.0")
 
     //初始化运行环境
-    val conf = new SparkConf().setAppName(" Secondary Sort ")
-      .setMaster("local")
+    val conf = new SparkConf().setAppName("Secondary Sort")
+      .setMaster("local[*]")
     var sc = new SparkContext(conf)
 
     //日志级别
     sc.setLogLevel("Warn")
 
     //val file = sc.textFile("hdfs://localhost:9000/Spark/SecondarySort/Input/SecondarySort2.txt")
-    val file = sc.textFile("d:\\TestData\\SecondarySort.txt")
+    val file = sc.textFile("E:\\Campanys\\CompanyWork\\EPS\\EPS_ITEM\\flink_report\\src\\main\\resources\\data\\input\\CSData\\SecondarySort2")
 
     val rdd = file.map(line => line.split(","))
                   .map(x=>((x(0),x(1)),x(3))).groupByKey().sortByKey(false)
@@ -37,7 +36,9 @@ object SecondarySort {
         buf.deleteCharAt(buf.length()-1)
         println(x._1+" "+buf.toString())
       })
+
     sc.stop()
+
   }
 
 }

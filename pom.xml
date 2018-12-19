@@ -18,6 +18,8 @@
     <flink.version>1.6.1</flink.version>
     <jdk.version>1.8</jdk.version>
     <scala.version>2.11.8</scala.version>
+    <hive.version>0.12.0</hive.version>
+    <hbase.version>1.0.0</hbase.version>
     <scala.binary.version>2.11</scala.binary.version>
     <mysql.driver.version>5.1.30</mysql.driver.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +27,23 @@
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <!--#####################################开发依赖配置##########################################-->
   <dependencies>
     <!--Flink Start-->
     <dependency>
@@ -79,10 +98,61 @@
       <artifactId>spark-mllib_${scala.binary.version}</artifactId>
       <version>${spark.version}</version>
     </dependency>
+    <!-- spark-streaming-kafka-0-10 -->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-kafka-0-10_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    <!-- spark-streaming-flume -->
+    <dependency>
+      <groupId>org.apache.spark</groupId>
+      <artifactId>spark-streaming-flume_${scala.binary.version}</artifactId>
+      <version>${spark.version}</version>
+    </dependency>
+    <!--Spark中的RPC是使用Akka实现 -->
+    <dependency>
+      <groupId>com.typesafe.akka</groupId>
+      <artifactId>akka-actor_2.11</artifactId>
+      <version>2.5.4</version>
+    </dependency>
     <!--Spark End-->
     <!--Hadoop Start-->
-
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-common</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-hdfs</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-mapreduce-client-core</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.hadoop</groupId>
+      <artifactId>hadoop-client</artifactId>
+      <version>${hadoop.version}</version>
+    </dependency>
     <!--Hadoop End-->
+    <!--Hive Start-->
+    <dependency>
+      <groupId>org.apache.hive</groupId>
+      <artifactId>hive-jdbc</artifactId>
+      <version>${hive.version}</version>
+    </dependency>
+    <!--Hive End-->
+    <!--HBase Start-->
+    <dependency>
+      <groupId>org.apache.hbase</groupId>
+      <artifactId>hbase-client</artifactId>
+      <version>${hbase.version}</version>
+    </dependency>
+    <!--HBase End-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
@@ -98,11 +168,11 @@
       <artifactId>flink-jdbc</artifactId>
       <version>1.6.1</version>
     </dependency>
-    <!--<dependency>
+    <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc6</artifactId>
       <version>11.2.0.3</version>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
